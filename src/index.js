@@ -7,35 +7,6 @@ import Navbar from "./components/Navbar";
 
 import "./styles.scss";
 
-export const useLocalStorage = (key, initialValue) => {
-  const [storedValue, setStoredValue] = useState(() => {
-      const valueFromLocalStorage = localStorage.getItem(key);
-      return valueFromLocalStorage ? 
-      JSON.parse(valueFromLocalStorage) 
-      : initialValue; 
-  });
-
-  const setValue = value => {
-    setStoredValue(value);
-    localStorage.setItem(key, JSON.stringify(value)); 
-  };
-
-  return [storedValue, setValue]; 
-};
-
-export const  useDarkMode = (key, initialValue) => {
-  const [darkModeValue, setDarkModeValue] = useLocalStorage(key, initialValue);
-
-  useEffect(() => {
-    let body = document.body;
-    darkModeValue ?
-    body.classList.add('dark-mode')
-    : body.classList.remove('dark-mode') 
-  }, [darkModeValue]);
-
-  return [darkModeValue, setDarkModeValue]
-}
-
 const App = () => {
   const [coinData, setCoinData] = useState([]);
 
